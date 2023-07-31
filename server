@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Webhook Trigger Page</title>
+</head>
+<body>
+  <!-- Your webpage content here -->
+
+  <script>
+    // Replace 'YOUR_WEBHOOK_URL' with the updated Zapier webhook URL
+    const webhookUrl = 'https://hooks.zapier.com/hooks/catch/12779748/31zp2xf/';
+
+    // Function to send a POST request to the webhook endpoint
+    function sendWebhookRequest() {
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // You can customize the payload sent to the webhook if needed
+        body: JSON.stringify({ message: 'Webpage visited!' }),
+      })
+        .then(response => {
+          if (response.ok) {
+            console.log('Webhook triggered successfully!');
+          } else {
+            console.error('Failed to trigger webhook:', response.statusText);
+          }
+        })
+        .catch(error => {
+          console.error('Error while triggering webhook:', error);
+        });
+    }
+
+    // Trigger the webhook request when the page is loaded
+    window.addEventListener('load', sendWebhookRequest);
+  </script>
+</body>
+</html>
